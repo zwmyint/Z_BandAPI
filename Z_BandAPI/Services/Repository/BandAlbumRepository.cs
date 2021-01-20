@@ -177,13 +177,17 @@ namespace Z_BandAPI.Services.Repository
         public void UpdateAlbum(m_cls_Album album)
         {
             //not implemented
-            throw new NotImplementedException();
+            
+            //Repository Pattern - is an abstraction that reduces complexity and aims to make the code 
+            //safe for the repository implementation, persistance ignorant.
+            
+            //throw new NotImplementedException();
         }
 
         public void UpdateBand(m_cls_Band band)
         {
             //not implemented
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
 

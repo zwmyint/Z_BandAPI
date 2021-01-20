@@ -11,11 +11,13 @@ namespace Z_BandAPI.ValidationAttributes
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var album = (AlbumForCreating_Dto)validationContext.ObjectInstance;
+            //var album = (AlbumForCreating_Dto)validationContext.ObjectInstance;
+            var album = (AlbumManipulation_Dto)validationContext.ObjectInstance;
 
             if (album.Title == album.Description)
             {
-                return new ValidationResult("The title and the description need to be different", new[] { "AlbumForCreating_Dto" });
+                //return new ValidationResult("The title and the description need to be different", new[] { "AlbumForCreating_Dto" });
+                return new ValidationResult("The title and the description need to be different", new[] { "AlbumManipulation_Dto" });
             }
 
             return ValidationResult.Success;

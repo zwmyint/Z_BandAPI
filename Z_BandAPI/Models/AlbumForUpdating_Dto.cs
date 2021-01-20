@@ -8,23 +8,18 @@ using Z_BandAPI.ValidationAttributes;
 namespace Z_BandAPI.Models
 {
     //[TitleAndDescriptionAttribute] // custom error message
-    public class AlbumForCreating_Dto : AlbumManipulation_Dto // : IValidatableObject
+    public class AlbumForUpdating_Dto : AlbumManipulation_Dto
     {
         //[Required]
         //[MaxLength(200)]
         //public string Title { get; set; }
 
+        //[Required]
         //[MaxLength(400)]
         //public string Description { get; set; }
 
-        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        //{
-        //    if(Title == Description)
-        //    {
-        //        yield return new ValidationResult("The title and description need to be different.", new[] { "AlbumForCreation_Dto" });
-        //    }
-        //}
-
-
+        [Required(ErrorMessage = "You need to fill description")]
+        public override string Description { get => base.Description; set => base.Description = value; }
+        //
     }
 }

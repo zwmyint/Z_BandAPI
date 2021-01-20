@@ -53,7 +53,6 @@ namespace Z_BandAPI.Controllers
         }
 
         // http://localhost:5000/api/bands/8e2f0a16-4c09-44c7-ba56-8dc62dfd792d/albums
-
         [HttpPost]
         public ActionResult<Albums_Dto> CreateAlbumForBand(Guid bandId, [FromBody] AlbumForCreating_Dto newalbum)
         {
@@ -68,10 +67,36 @@ namespace Z_BandAPI.Controllers
             return CreatedAtRoute("GetAlbumForBand", new { bandId = bandId, albumId = albumToReturn.Id }, albumToReturn);
         }
 
-        //
+        // http://localhost:5000/api/bands/a052a63d-fa53-44d5-a197-83089818a676/albums/218a7203-77a7-44b5-3982-08d8bd41f19d
+        [HttpPut("{albumId}")]
+        public ActionResult UpdateAlbumForBand(Guid bandId, Guid albumId, [FromBody] AlbumForUpdating_Dto updatealbum)
+        {
+            if (!_bandAlbumRepository.BandExists(bandId))
+                return NotFound();
 
+            var albumFromRepo = _bandAlbumRepository.GetAlbum(bandId, albumId);
+            if (albumFromRepo == null)
+            {
+                //    var albumToAdd = _mapper.Map<Entities.m_cls_Album>(updatealbum);
+                //    albumToAdd.Id = albumId;
+                //    _bandAlbumRepository.AddAlbum(bandId, albumToAdd);
+                //    _bandAlbumRepository.Save();
 
+                //    var albumToReturn = _mapper.Map<Albums_Dto>(albumToAdd);
 
+                //    return CreatedAtRoute("GetAlbumForBand", new { bandId = bandId, albumId = albumToReturn.Id }, albumToReturn);
+
+                return NotFound();
+            }
+
+            _mapper.Map(updatealbum, albumFromRepo); // Profiles
+
+            _bandAlbumRepository.UpdateAlbum(albumFromRepo);
+            _bandAlbumRepository.Save();
+
+            return NoContent();
+            //
+        }
 
         //
     }
